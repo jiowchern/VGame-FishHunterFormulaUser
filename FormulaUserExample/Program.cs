@@ -99,7 +99,7 @@ namespace FormulaUserExample
         static void _Connect(Regulus.Utility.IConnect obj)
         {
             // 與伺服器連線
-            var result = obj.Connect("192.168.0.89", 17722);
+            var result = obj.Connect("210.65.10.160", 38971);
             result.OnValue += (success)=>
             {
                 if (success)
