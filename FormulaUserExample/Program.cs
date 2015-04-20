@@ -111,7 +111,7 @@ namespace FormulaUserExample
         // 驗證登入
         static void _Verify(VGame.Project.FishHunter.IVerify obj)
         {
-            var result = obj.Login("id", "pw");
+            var result = obj.Login("Guest", "guest");
             result.OnValue += (success) =>
             {
                 if (success)
