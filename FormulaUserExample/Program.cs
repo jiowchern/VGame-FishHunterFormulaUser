@@ -8,6 +8,7 @@ namespace FormulaUserExample
 {
     class Program
     {
+        static VGame.Project.FishHunter.IFishStage _FishStage;
         static void Main(string[] args)
         {
 
@@ -29,17 +30,15 @@ namespace FormulaUserExample
         // 取得User
         static void _User(VGame.Project.FishHunter.Formula.IUser user)
         {
-            // 註冊相關元件
+            // 註冊相關元件            
             user.Remoting.ConnectProvider.Supply += _Connect;
             user.VerifyProvider.Supply += _Verify;
             user.FishStageQueryerProvider.Supply += _FishStageQueryer;
-            user.FishStageProvider.Supply += _FishStage;
+            
         }
 
-        static void _FishStage(VGame.Project.FishHunter.IFishStage obj)
+        static void _GetFishStage(VGame.Project.FishHunter.IFishStage obj)
         {
-            // 註冊攻擊回傳
-            obj.HitResponseEvent += _HitResponse;
             // 註冊例外訊息
             obj.HitExceptionEvent += (message) => 
             {
@@ -68,7 +67,16 @@ namespace FormulaUserExample
             request.WepType = 1;
 
             System.Console.WriteLine("攻擊測試");
+
+            // 註冊攻擊回傳
+            obj.HitResponseEvent += _HitResponse;
+
+
             obj.Hit(request);
+
+            // 需要接下回傳的變數
+            _FishStage = obj;
+            
         }
 
         static void _HitResponse(VGame.Project.FishHunter.HitResponse obj)
@@ -85,10 +93,13 @@ namespace FormulaUserExample
         {
             // 請求開啟魚場
             var result = obj.Query(12345, 1);
-            result.OnValue += (success) =>
+            result.OnValue += (fish_stage) =>
             {
-                if (success)
+                if (fish_stage != null)
+                {
                     System.Console.WriteLine("魚場開啟成功");
+                    _GetFishStage(fish_stage);
+                }                    
                 else
                     System.Console.WriteLine("魚場開啟失敗");
             };
@@ -100,6 +111,7 @@ namespace FormulaUserExample
         {
             // 與伺服器連線
             var result = obj.Connect("210.65.10.160", 38971);
+            //var result = obj.Connect("127.0.0.1", 38971);
             result.OnValue += (success)=>
             {
                 if (success)

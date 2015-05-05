@@ -38,20 +38,21 @@
     <Reference Include="FormulaUser">
       <HintPath>..\Library\FormulaUser.dll</HintPath>
     </Reference>
-    <Reference Include="INIFileParser">
-      <HintPath>..\Library\INIFileParser.dll</HintPath>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\Library\protobuf-net.dll</HintPath>
+    <Reference Include="RegulusLibrary, Version=1.0.5603.18864, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RegulusLibrary.0.0.3\lib\net35\RegulusLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="RegulusLibrary">
-      <HintPath>..\Library\RegulusLibrary.dll</HintPath>
+    <Reference Include="RegulusRemoting, Version=1.0.5602.30764, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RegulusRemoting.0.0.5\lib\net35\RegulusRemoting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Remoting">
-      <HintPath>..\Library\Remoting.dll</HintPath>
-    </Reference>
-    <Reference Include="RemotingNativeGhost">
-      <HintPath>..\Library\RemotingNativeGhost.dll</HintPath>
+    <Reference Include="RegulusRemotingNativeGhost, Version=1.0.5602.30764, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RegulusRemotingClient.0.0.5\lib\net35\RegulusRemotingNativeGhost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
