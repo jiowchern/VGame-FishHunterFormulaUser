@@ -11,7 +11,7 @@ namespace FormulaUserExample
         static VGame.Project.FishHunter.IFishStage _FishStage;
         static void Main(string[] args)
         {
-
+            var sw =new  System.Threading.SpinWait();
             // 初始化
             var client = VGame.Project.FishHunter.Formula.RemotingClient.Create();
             client.UserEvent += _User;
@@ -22,6 +22,8 @@ namespace FormulaUserExample
             while(client.Enable)
             {
                 updater.Update();
+
+                sw.SpinOnce();
             }
             updater.Shutdown();
 

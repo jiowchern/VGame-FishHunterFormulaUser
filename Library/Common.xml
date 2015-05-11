@@ -111,6 +111,12 @@
             有取得特殊武器从“2”开始。对应特武编号。
             </summary>
         </member>
+        <member name="F:VGame.Project.FishHunter.HitResponse.WUp">
+            <summary>
+            
+            1 = 沒有翻倍        
+            </summary>
+        </member>
         <member name="T:VGame.Project.FishHunter.IFishStage">
             <summary>
             魚場

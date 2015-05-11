@@ -42,16 +42,16 @@
       <HintPath>packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RegulusLibrary, Version=1.0.5603.18864, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RegulusLibrary.0.0.3\lib\net35\RegulusLibrary.dll</HintPath>
+    <Reference Include="RegulusLibrary, Version=1.0.5609.16294, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RegulusLibrary.0.0.4\lib\net35\RegulusLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RegulusRemoting, Version=1.0.5602.30764, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RegulusRemoting.0.0.5\lib\net35\RegulusRemoting.dll</HintPath>
+    <Reference Include="RegulusRemoting, Version=1.0.5609.17645, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RegulusRemoting.0.0.6\lib\net35\RegulusRemoting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RegulusRemotingNativeGhost, Version=1.0.5602.30764, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RegulusRemotingClient.0.0.5\lib\net35\RegulusRemotingNativeGhost.dll</HintPath>
+    <Reference Include="RegulusRemotingNativeGhost, Version=1.0.5609.17645, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RegulusRemotingClient.0.0.6\lib\net35\RegulusRemotingNativeGhost.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
