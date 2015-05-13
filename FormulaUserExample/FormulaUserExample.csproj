@@ -54,9 +54,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\RegulusRemotingNativeGhost.dll</HintPath>
     </Reference>
-    <Reference Include="RegulusRemotingStandalong">
-      <HintPath>..\Library\RegulusRemotingStandalong.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
