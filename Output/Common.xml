@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Common</name>
+    </assembly>
+    <members>
+        <member name="T:VGame.Project.FishHunter.FISH_STATUS">
+            <summary>
+            鱼的状态。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.FISH_STATUS.NORMAL">
+            <summary>
+            正常状态
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.FISH_STATUS.KING">
+            <summary>
+            鱼王状态
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.FISH_STATUS.FREEZE">
+            <summary>
+            冰冻状态
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.HitRequest">
+            <summary>
+            判定請求
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.WepID">
+            <summary>
+            子弹编号，识别是那颗子弹（网）用的。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.WepType">
+            <summary>
+            子弹形态。一般子弹为“1”。特殊子弹从“2”开始。。。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.WepBet">
+            <summary>
+            子弹分数，就是该子弹的玩家押注分数。从1~10000。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.WepOdds">
+            <summary>
+            子弹倍数，就是该子弹的玩家押注倍数。从1~10000。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.FishID">
+            <summary>
+            鱼的编号，识别是那只鱼用的。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.FishType">
+            <summary>
+            鱼的种类。一般鱼从1~99。特殊鱼从201开始。。。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.FishOdds">
+            <summary>
+            鱼的倍数。应该从1~1000。目前只预留到1000倍。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.FishStatus">
+            <summary>
+            鱼的状态。         
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.TotalHits">
+            <summary>
+            该网同时击中的鱼总数量。应该从1~1000。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.HitCnt">
+            <summary>
+            同时击中的排序序号，应该是从1~ TotalHits。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitRequest.TotalHitOdds">
+            <summary>
+            该网同时击中的鱼倍数总和。
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.HitResponse">
+            <summary>
+            判定结果
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitResponse.WepID">
+            <summary>
+            子弹编号
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitResponse.FishID">
+            <summary>
+            鱼的编号
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitResponse.DieResult">
+            <summary>
+            死亡结果        
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitResponse.SpecAsn">
+            <summary>
+            取得特殊武器。
+            0表示没有取得。
+            有取得特殊武器从“2”开始。对应特武编号。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.HitResponse.WUp">
+            <summary>
+            
+            1 = 沒有翻倍        
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.IFishStage">
+            <summary>
+            魚場
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.IFishStage.Hit(VGame.Project.FishHunter.HitRequest)">
+            <summary>
+            判定請求
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="P:VGame.Project.FishHunter.IFishStage.AccountId">
+            <summary>
+            玩家id
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.IFishStage.FishStage">
+            <summary>
+            魚場id
+            </summary>
+        </member>
+        <member name="E:VGame.Project.FishHunter.IFishStage.HitResponseEvent">
+            <summary>
+            判定結果事件
+            </summary>
+        </member>
+        <member name="E:VGame.Project.FishHunter.IFishStage.HitExceptionEvent">
+            <summary>
+            例外
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.IFishStageQueryer">
+            <summary>
+            魚場請求
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.IFishStageQueryer.Query(System.Int64,System.Byte)">
+            <summary>
+            查詢請求
+            </summary>
+            <param name="玩家id"></param>
+            <param name="魚場id"></param>
+            <returns>魚場</returns>
+        </member>
+        <member name="M:VGame.Project.FishHunter.IVerify.Login(System.String,System.String)">
+            <summary>
+            驗證
+            </summary>
+            <param name="帳號"></param>
+            <param name="密碼"></param>
+            <returns>回傳真則為成功</returns>
+        </member>
+    </members>
+</doc>
