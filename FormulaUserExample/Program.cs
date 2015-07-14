@@ -21,7 +21,7 @@ namespace FormulaUserExample
             updater.Add(client);
             while(client.Enable)
             {
-                updater.Update();
+                updater.Working();
 
                 sw.SpinOnce();
             }
@@ -36,6 +36,14 @@ namespace FormulaUserExample
             user.Remoting.ConnectProvider.Supply += _Connect;
             user.VerifyProvider.Supply += _Verify;
             user.FishStageQueryerProvider.Supply += _FishStageQueryer;
+
+            //註冊取得連線成功狀態物件
+            user.Remoting.OnlineProvider.Supply += _OnlineStatus;
+            
+        }
+
+        private static void _OnlineStatus(Regulus.Utility.IOnline online)
+        {
             
         }
 
