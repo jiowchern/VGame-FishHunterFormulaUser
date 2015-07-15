@@ -9,12 +9,14 @@ namespace FormulaUserExample
     class Program
     {
         static VGame.Project.FishHunter.IFishStage _FishStage;
+        private static Regulus.Utility.IOnline _Online;
+        private static VGame.Project.FishHunter.Formula.IUser _User;
         static void Main(string[] args)
         {
             var sw =new  System.Threading.SpinWait();
             // 初始化
             var client = VGame.Project.FishHunter.Formula.RemotingClient.Create();
-            client.UserEvent += _User;
+            client.UserEvent += _OnUser;
 
             // 建立loop迴圈以便接收封包
             var updater = new Regulus.Utility.Updater();
@@ -30,21 +32,30 @@ namespace FormulaUserExample
         }
 
         // 取得User
-        static void _User(VGame.Project.FishHunter.Formula.IUser user)
+        static void _OnUser(VGame.Project.FishHunter.Formula.IUser user)
         {
+            _User = user;   
             // 註冊相關元件            
             user.Remoting.ConnectProvider.Supply += _Connect;
             user.VerifyProvider.Supply += _Verify;
             user.FishStageQueryerProvider.Supply += _FishStageQueryer;
 
-            //註冊取得連線成功狀態物件
-            user.Remoting.OnlineProvider.Supply += _OnlineStatus;
+            //註冊取得連線成功狀態物件            
+            user.Remoting.OnlineProvider.Supply += _BeginOnlineStatus;
+            //註冊斷線事件
+            user.Remoting.OnlineProvider.Unsupply += _EndOnlineStatus;
             
         }
-
-        private static void _OnlineStatus(Regulus.Utility.IOnline online)
+        private static void _BeginOnlineStatus(Regulus.Utility.IOnline online)
         {
-            
+            // 連線成功處理工作...
+            _Online = online;
+        }
+        private static void _EndOnlineStatus(Regulus.Utility.IOnline online)
+        {
+            // 在這裡處理斷線工作...
+
+            System.Console.WriteLine("斷線");
         }
 
         static void _GetFishStage(VGame.Project.FishHunter.IFishStage obj)
@@ -97,6 +108,9 @@ namespace FormulaUserExample
             else
                 System.Console.WriteLine("存活");
 
+
+            _Online.Disconnect();
+
         }
 
         private static void _FishStageQueryer(VGame.Project.FishHunter.IFishStageQueryer obj)
@@ -119,6 +133,8 @@ namespace FormulaUserExample
 
         static void _Connect(Regulus.Utility.IConnect obj)
         {
+            _User.Remoting.ConnectProvider.Supply -= _Connect;
+
             // 與伺服器連線
             var result = obj.Connect("210.65.10.160", 38971);
             //var result = obj.Connect("127.0.0.1", 38971);
