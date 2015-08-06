@@ -8,8 +8,8 @@ namespace FormulaUserExample
 {
     class Program
     {
-        static VGame.Project.FishHunter.IFishStage _FishStage;
-        private static Regulus.Utility.IOnline _Online;
+        static VGame.Project.FishHunter.Common.GPI.IFishStage _FishStage;
+        private static Regulus.Remoting.IOnline _Online;
         private static VGame.Project.FishHunter.Formula.IUser _User;
         static void Main(string[] args)
         {
@@ -46,19 +46,19 @@ namespace FormulaUserExample
             user.Remoting.OnlineProvider.Unsupply += _EndOnlineStatus;
             
         }
-        private static void _BeginOnlineStatus(Regulus.Utility.IOnline online)
+        private static void _BeginOnlineStatus(Regulus.Remoting.IOnline online)
         {
             // 連線成功處理工作...
             _Online = online;
         }
-        private static void _EndOnlineStatus(Regulus.Utility.IOnline online)
+        private static void _EndOnlineStatus(Regulus.Remoting.IOnline online)
         {
             // 在這裡處理斷線工作...
 
             System.Console.WriteLine("斷線");
         }
 
-        static void _GetFishStage(VGame.Project.FishHunter.IFishStage obj)
+        static void _GetFishStage(VGame.Project.FishHunter.Common.GPI.IFishStage obj)
         {
             // 註冊例外訊息
             obj.HitExceptionEvent += (message) => 
@@ -70,14 +70,14 @@ namespace FormulaUserExample
             _Attack(obj);
         }
 
-        private static void _Attack(VGame.Project.FishHunter.IFishStage obj)
+        private static void _Attack(VGame.Project.FishHunter.Common.GPI.IFishStage obj)
         {
             // 攻擊判定請求
-            var request = new VGame.Project.FishHunter.HitRequest();
+            var request = new VGame.Project.FishHunter.Common.Data.HitRequest();
 
             request.FishID = 1;
             request.FishOdds = 1;
-            request.FishStatus = VGame.Project.FishHunter.FISH_STATUS.NORMAL | VGame.Project.FishHunter.FISH_STATUS.KING;
+            request.FishStatus = VGame.Project.FishHunter.Common.Data.FISH_STATUS.NORMAL | VGame.Project.FishHunter.Common.Data.FISH_STATUS.KING;
             request.FishType = 1;
             request.HitCnt  = 1 ;
             request.TotalHitOdds = 1;
@@ -100,10 +100,10 @@ namespace FormulaUserExample
             
         }
 
-        static void _HitResponse(VGame.Project.FishHunter.HitResponse obj)
+        static void _HitResponse(VGame.Project.FishHunter.Common.Data.HitResponse obj)
         {
             // TODO : 取得攻擊傳回結果
-            if(obj.DieResult == VGame.Project.FishHunter.FISH_DETERMINATION.DEATH)
+            if(obj.DieResult == VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.DEATH)
                 System.Console.WriteLine("死亡");
             else
                 System.Console.WriteLine("存活");
@@ -113,7 +113,7 @@ namespace FormulaUserExample
 
         }
 
-        private static void _FishStageQueryer(VGame.Project.FishHunter.IFishStageQueryer obj)
+        private static void _FishStageQueryer(VGame.Project.FishHunter.Common.GPI.IFishStageQueryer obj)
         {
             // 請求開啟魚場
             var result = obj.Query(12345, 1);
@@ -131,7 +131,7 @@ namespace FormulaUserExample
 
         
 
-        static void _Connect(Regulus.Utility.IConnect obj)
+        static void _Connect(Regulus.Remoting.IConnect obj)
         {
             _User.Remoting.ConnectProvider.Supply -= _Connect;
 
@@ -147,7 +147,7 @@ namespace FormulaUserExample
             };
         }
         // 驗證登入
-        static void _Verify(VGame.Project.FishHunter.IVerify obj)
+        static void _Verify(VGame.Project.FishHunter.Common.GPI.IVerify obj)
         {
             var result = obj.Login("Guest", "guest");
             result.OnValue += (success) =>

@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common">
-      <HintPath>..\Library\Common.dll</HintPath>
+    <Reference Include="FishHunterCommon">
+      <HintPath>..\Library\FishHunterCommon.dll</HintPath>
     </Reference>
     <Reference Include="FormulaUser">
       <HintPath>..\Library\FormulaUser.dll</HintPath>
