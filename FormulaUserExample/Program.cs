@@ -1,25 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
+using System.Threading;
+
+
+using Regulus.Remoting;
+using Regulus.Utility;
+
+using VGame.Project.FishHunter.Common.Data;
+using VGame.Project.FishHunter.Common.GPI;
+using VGame.Project.FishHunter.Formula;
+
+using Console = System.Console;
+using SpinWait = System.Threading.SpinWait;
 
 namespace FormulaUserExample
 {
-    class Program
+    internal class Program
     {
-        static VGame.Project.FishHunter.Common.GPI.IFishStage _FishStage;
-        private static Regulus.Remoting.IOnline _Online;
-        private static VGame.Project.FishHunter.Formula.IUser _User;
-        static void Main(string[] args)
+        private static IFishStage _FishStage;
+
+        private static IOnline _Online;
+
+        private static IUser _User;
+
+        private static void Main(string[] args)
         {
-            var sw =new  System.Threading.SpinWait();
+            var sw = new SpinWait();
+
             // 初始化
-            var client = VGame.Project.FishHunter.Formula.RemotingClient.Create();
-            client.UserEvent += _OnUser;
+            var client = RemotingClient.Create();
+            client.UserEvent += Program._OnUser;
 
             // 建立loop迴圈以便接收封包
-            var updater = new Regulus.Utility.Updater();
+            var updater = new Updater();
             updater.Add(client);
             while(client.Enable)
             {
@@ -27,138 +40,176 @@ namespace FormulaUserExample
 
                 sw.SpinOnce();
             }
-            updater.Shutdown();
 
+            updater.Shutdown();
         }
 
         // 取得User
-        static void _OnUser(VGame.Project.FishHunter.Formula.IUser user)
+        private static void _OnUser(IUser user)
         {
-            _User = user;   
-            // 註冊相關元件            
-            user.Remoting.ConnectProvider.Supply += _Connect;
-            user.VerifyProvider.Supply += _Verify;
-            user.FishStageQueryerProvider.Supply += _FishStageQueryer;
+            Program._User = user;
 
-            //註冊取得連線成功狀態物件            
-            user.Remoting.OnlineProvider.Supply += _BeginOnlineStatus;
-            //註冊斷線事件
-            user.Remoting.OnlineProvider.Unsupply += _EndOnlineStatus;
-            
+            // 註冊相關元件            
+            user.Remoting.ConnectProvider.Supply += Program._Connect;
+            user.VerifyProvider.Supply += Program._Verify;
+            user.FishStageQueryerProvider.Supply += Program._FishStageQueryer;
+
+            // 註冊取得連線成功狀態物件            
+            user.Remoting.OnlineProvider.Supply += Program._BeginOnlineStatus;
+
+            // 註冊斷線事件
+            user.Remoting.OnlineProvider.Unsupply += Program._EndOnlineStatus;
         }
-        private static void _BeginOnlineStatus(Regulus.Remoting.IOnline online)
+
+        private static void _BeginOnlineStatus(IOnline online)
         {
             // 連線成功處理工作...
-            _Online = online;
+            Program._Online = online;
         }
-        private static void _EndOnlineStatus(Regulus.Remoting.IOnline online)
+
+        private static void _EndOnlineStatus(IOnline online)
         {
             // 在這裡處理斷線工作...
-
-            System.Console.WriteLine("斷線");
+            Console.WriteLine("斷線");
         }
 
-        static void _GetFishStage(VGame.Project.FishHunter.Common.GPI.IFishStage obj)
+        private static void _GetFishStage(IFishStage obj)
         {
             // 註冊例外訊息
-            obj.HitExceptionEvent += (message) => 
-            {
-                System.Console.WriteLine(message);
-            };
+            obj.OnHitExceptionEvent += Console.WriteLine;
 
             // 攻擊測試
-            _Attack(obj);
+            Program._Attack(obj);
         }
 
-        private static void _Attack(VGame.Project.FishHunter.Common.GPI.IFishStage obj)
+        /// <summary>
+        ///     public RequsetFishData[] FishDatas
+        ///     public RequestWeaponData WeaponData
+        /// </summary>
+        /// <param name="fish_stage"></param>
+        private static void _Attack(IFishStage fish_stage)
         {
+            var fishs = new[]
+            {
+                new RequsetFishData
+                {
+                    FishId = 1, 
+                    FishOdds = 1, 
+                    FishStatus = FISH_STATUS.NORMAL, 
+                    FishType = FISH_TYPE.ANGEL_FISH
+                },
+                
+                new RequsetFishData
+                {
+                    FishId = 2,
+                    FishOdds = 100,
+                    FishStatus = FISH_STATUS.NORMAL,
+                    FishType = FISH_TYPE.BELUGA_WHALES
+                }
+            };
+
+            var weapdaData = new RequestWeaponData
+            {
+                WepId = 1, 
+                WepBet = 1, 
+                WepOdds = 100, 
+                WeaponType = WEAPON_TYPE.NORMAL,
+                TotalHits = 2,
+                TotalHitOdds = 1, 
+            };
+
             // 攻擊判定請求
-            var request = new VGame.Project.FishHunter.Common.Data.HitRequest();
+            Console.WriteLine("攻擊測試");
 
-            request.FishID = 1;
-            request.FishOdds = 1;
-            request.FishStatus = VGame.Project.FishHunter.Common.Data.FISH_STATUS.NORMAL | VGame.Project.FishHunter.Common.Data.FISH_STATUS.KING;
-            request.FishType = 1;
-            request.HitCnt  = 1 ;
-            request.TotalHitOdds = 1;
-            request.TotalHits = 1;
-            request.WepBet = 1;
-            request.WepID = 1;
-            request.WepOdds = 1;
-            request.WepType = 1;
+            var hitRequest = new HitRequest(fishs, weapdaData);
 
-            System.Console.WriteLine("攻擊測試");
+            fish_stage.Hit(hitRequest);
 
             // 註冊攻擊回傳
-            obj.HitResponseEvent += _HitResponse;
-
-
-            obj.Hit(request);
+            fish_stage.OnTotalHitResponseEvent += Program.Obj_OnTotalHitResponseEvent; 
 
             // 需要接下回傳的變數
-            _FishStage = obj;
-            
+            Program._FishStage = fish_stage;
         }
 
-        static void _HitResponse(VGame.Project.FishHunter.Common.Data.HitResponse obj)
+        private static void Obj_OnTotalHitResponseEvent(HitResponse[] hit_responses)
         {
-            // TODO : 取得攻擊傳回結果
-            if(obj.DieResult == VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.DEATH)
-                System.Console.WriteLine("死亡");
-            else
-                System.Console.WriteLine("存活");
-
-
-            _Online.Disconnect();
-
-        }
-
-        private static void _FishStageQueryer(VGame.Project.FishHunter.Common.GPI.IFishStageQueryer obj)
-        {
-            // 請求開啟魚場
-            var result = obj.Query(12345, 1);
-            result.OnValue += (fish_stage) =>
+            foreach(var response in hit_responses)
             {
-                if (fish_stage != null)
+                Console.WriteLine(response.DieResult == FISH_DETERMINATION.DEATH ? "死亡" : "存活");
+
+                foreach(var weaponType in response.FeedbackWeaponType)
                 {
-                    System.Console.WriteLine("魚場開啟成功");
-                    _GetFishStage(fish_stage);
-                }                    
+                    Console.WriteLine("得到的道具是" + weaponType);
+                }
+            }
+
+            Program._Online.Disconnect();
+        }
+
+        /// <summary>
+        ///     目前算法漁場ID是1 跟 100
+        ///     100是新算法
+        ///     player id 改成 GUID
+        /// </summary>
+        /// <param name="obj"></param>
+        private static void _FishStageQueryer(IFishStageQueryer obj)
+        {
+            var id = new Guid();
+
+            // 請求開啟魚場
+            var result = obj.Query(id, 100);
+            result.OnValue += fish_stage =>
+            {
+                if(fish_stage != null)
+                {
+                    Console.WriteLine("魚場開啟成功");
+                    
+                    Program._GetFishStage(fish_stage);
+                }
                 else
-                    System.Console.WriteLine("魚場開啟失敗");
+                {
+                    Console.WriteLine("魚場開啟失敗");
+                }
             };
         }
 
-        
-
-        static void _Connect(Regulus.Remoting.IConnect obj)
+        private static void _Connect(IConnect obj)
         {
-            _User.Remoting.ConnectProvider.Supply -= _Connect;
+            Program._User.Remoting.ConnectProvider.Supply -= Program._Connect;
 
             // 與伺服器連線
-            var result = obj.Connect("210.65.10.160", 38971);
-            //var result = obj.Connect("127.0.0.1", 38971);
-            result.OnValue += (success)=>
+            //var result = hit_responses.Connect("210.65.10.160", 38971);
+
+            var result = obj.Connect("127.0.0.1", 38971);
+            result.OnValue += success =>
             {
-                if (success)
-                    System.Console.WriteLine("連線成功");
+                if(success)
+                {
+                    Console.WriteLine("連線成功");
+                }
                 else
-                    System.Console.WriteLine("連線失敗");
-            };
-        }
-        // 驗證登入
-        static void _Verify(VGame.Project.FishHunter.Common.GPI.IVerify obj)
-        {
-            var result = obj.Login("Guest", "guest");
-            result.OnValue += (success) =>
-            {
-                if (success)
-                    System.Console.WriteLine("登入成功");
-                else
-                    System.Console.WriteLine("登入失敗");
+                {
+                    Console.WriteLine("連線失敗");
+                }
             };
         }
 
-        
+        // 驗證登入
+        private static void _Verify(IVerify obj)
+        {
+            var result = obj.Login("Guest", "vgame");
+            result.OnValue += success =>
+            {
+                if(success)
+                {
+                    Console.WriteLine("登入成功");
+                }
+                else
+                {
+                    Console.WriteLine("登入失敗");
+                }
+            };
+        }
     }
 }
