@@ -14,7 +14,7 @@ using Console = System.Console;
 using SpinWait = System.Threading.SpinWait;
 
 namespace FormulaUserExample
-{
+{   
     internal class Program
     {
         private static IFishStage _FishStage;
@@ -114,8 +114,7 @@ namespace FormulaUserExample
                 WepBet = 1, 
                 WepOdds = 100, 
                 WeaponType = WEAPON_TYPE.NORMAL,
-                TotalHits = 2,
-                TotalHitOdds = 1, 
+                TotalHits = 2,                
             };
 
             // 攻擊判定請求
