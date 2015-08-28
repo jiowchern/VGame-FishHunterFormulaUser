@@ -136,11 +136,14 @@ namespace FormulaUserExample
             foreach(var response in hit_responses)
             {
                 Console.WriteLine(response.DieResult == FISH_DETERMINATION.DEATH ? "死亡" : "存活");
-
-                foreach(var weaponType in response.FeedbackWeaponType)
+                if(response.FeedbackWeaponType != null)
                 {
-                    Console.WriteLine("得到的道具是" + weaponType);
+                    foreach (var weaponType in response.FeedbackWeaponType)
+                    {
+                        Console.WriteLine("得到的道具是" + weaponType);
+                    }
                 }
+                
             }
 
             Program._Online.Disconnect();
