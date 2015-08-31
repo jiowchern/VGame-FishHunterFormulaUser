@@ -14,7 +14,7 @@ using Console = System.Console;
 using SpinWait = System.Threading.SpinWait;
 
 namespace FormulaUserExample
-{
+{   
     internal class Program
     {
         private static IFishStage _FishStage;
@@ -114,8 +114,7 @@ namespace FormulaUserExample
                 WepBet = 1, 
                 WepOdds = 100, 
                 WeaponType = WEAPON_TYPE.NORMAL,
-                TotalHits = 2,
-                TotalHitOdds = 1, 
+                TotalHits = 2,                
             };
 
             // 攻擊判定請求
@@ -137,11 +136,14 @@ namespace FormulaUserExample
             foreach(var response in hit_responses)
             {
                 Console.WriteLine(response.DieResult == FISH_DETERMINATION.DEATH ? "死亡" : "存活");
-
-                foreach(var weaponType in response.FeedbackWeaponType)
+                if(response.FeedbackWeaponType != null)
                 {
-                    Console.WriteLine("得到的道具是" + weaponType);
+                    foreach (var weaponType in response.FeedbackWeaponType)
+                    {
+                        Console.WriteLine("得到的道具是" + weaponType);
+                    }
                 }
+                
             }
 
             Program._Online.Disconnect();
