@@ -58,23 +58,23 @@ namespace FormulaUserExample
 			// 註冊斷線事件
 			user.Remoting.OnlineProvider.Unsupply += Program._EndOnlineStatus;
 
-            // 如果有錯誤的方法呼叫則會發生此事件
-            // 通常原因可能是版本有誤
-            // 請到 https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master 更新版本
-            _User.ErrorMethodEvent += _ErrorMethodEvent;
+			// 如果有錯誤的方法呼叫則會發生此事件
+			// 通常原因可能是版本有誤
+			// 請到 https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master 更新版本
+			_User.ErrorMethodEvent += _ErrorMethodEvent;
 		}
 
-	    private static void _ErrorMethodEvent(string method, string message)
-	    {
-	        Console.WriteLine(@"錯誤的方法呼叫{0} \n 
-            如果有錯誤的方法呼叫則會發生此事件\n 
-            通常原因可能是版本有誤\n 
-            請到 https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master 更新版本\n 
-            {1} 
-            ", method , message);
-	    }
+		private static void _ErrorMethodEvent(string method, string message)
+		{
+			Console.WriteLine(@"錯誤的方法呼叫{0} \n 
+			如果有錯誤的方法呼叫則會發生此事件\n 
+			通常原因可能是版本有誤\n 
+			請到 https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master 更新版本\n 
+			{1} 
+			", method , message);
+		}
 
-	    private static void _BeginOnlineStatus(IOnline online)
+		private static void _BeginOnlineStatus(IOnline online)
 		{
 			// 連線成功處理工作...
 			Program._Online = online;
@@ -107,18 +107,10 @@ namespace FormulaUserExample
 				new RequsetFishData
 				{
 					FishId = 1, 
-					FishOdds = 1, 
+					FishOdds = 100, 
 					FishStatus = FISH_STATUS.NORMAL, 
-					FishType = FISH_TYPE.SPECIAL_BIG_OCTOPUS_BOMB
+					FishType = FISH_TYPE.WHALE_COLOR
 				},
-				
-				new RequsetFishData
-				{
-					FishId = 2,
-					FishOdds = 100,
-					FishStatus = FISH_STATUS.NORMAL,
-					FishType = FISH_TYPE.BELUGA_WHALES
-				}
 			};
 
 			var weapdaData = new RequestWeaponData
@@ -127,7 +119,7 @@ namespace FormulaUserExample
 				WeaponType = WEAPON_TYPE.NORMAL,
 				WeaponBet = 100, 
 				WeaponOdds = 1, 
-				TotalHits = 2,                
+				TotalHits = 1,                
 			};
 
 			// 攻擊判定請求
