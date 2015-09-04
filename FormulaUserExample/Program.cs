@@ -107,9 +107,10 @@ namespace FormulaUserExample
 				new RequsetFishData
 				{
 					FishId = 1, 
-					FishOdds = 100, 
-					FishStatus = FISH_STATUS.NORMAL, 
-					FishType = FISH_TYPE.WHALE_COLOR
+					FishOdds = 1, 
+					FishStatus = FISH_STATUS.KING, 
+					FishType = FISH_TYPE.TROPICAL_FISH,
+					GraveGoods = new RequsetFishData[0],
 				},
 			};
 
