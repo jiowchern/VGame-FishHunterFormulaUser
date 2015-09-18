@@ -72,6 +72,13 @@
                 鱼的倍数。应该从1~1000。目前只预留到1000倍。
             </summary>
         </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.GraveGoods">
+            <summary>
+            陪葬品
+            條件觸發後，跟發動者一起死
+            例如 炸彈炸到的魚、魚王的小魚
+            </summary>
+        </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.FarmBuffer">
             <summary>
                 The data.

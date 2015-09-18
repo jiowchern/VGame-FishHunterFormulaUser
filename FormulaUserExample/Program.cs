@@ -194,11 +194,12 @@ namespace FormulaUserExample
 		{
 			Program._User.Remoting.ConnectProvider.Supply -= Program._Connect;
 
-			// 與伺服器連線
-			var result = obj.Connect("210.65.10.160", 38971);
+            // 與伺服器連線
+            var result = obj.Connect("210.65.10.160", 38971);
+            //var result = obj.Connect("127.0.0.1", 38971);
 
-			//var result = obj.Connect("127.0.0.1", 38971);
-			result.OnValue += success =>
+            //var result = obj.Connect("127.0.0.1", 38971);
+            result.OnValue += success =>
 			{
 				if(success)
 				{
