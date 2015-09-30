@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VGame.Project.SuperComplexWheel.FormulaUser</name>
+    </assembly>
+    <members>
+        <member name="M:VGame.Project.SuperComplexWheel.FormulaUser.Agent.Create">
+            <summary>
+            建立代理器
+            </summary>
+            <returns>回傳IAgent</returns>
+        </member>
+        <member name="M:VGame.Project.SuperComplexWheel.FormulaUser.Agent.VerifyProvider(Regulus.Remoting.IAgent)">
+            <summary>
+            驗證元件
+            </summary>
+            <param name="agent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VGame.Project.SuperComplexWheel.FormulaUser.Agent.WheelServiceProvider(Regulus.Remoting.IAgent)">
+            <summary>
+            轉輪元件
+            </summary>
+            <param name="agent"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
