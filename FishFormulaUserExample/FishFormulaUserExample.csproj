@@ -32,26 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FishHunterCommon">
-      <HintPath>..\Library\FishHunterCommon.dll</HintPath>
+    <Reference Include="FishHunterCommon, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FishLibrary\FishHunterCommon.dll</HintPath>
     </Reference>
-    <Reference Include="FormulaUser">
-      <HintPath>..\Library\FormulaUser.dll</HintPath>
+    <Reference Include="FormulaUser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FishLibrary\FormulaUser.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\protobuf-net.dll</HintPath>
+      <HintPath>..\FishLibrary\protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="RegulusLibrary, Version=1.0.5611.16140, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RegulusLibrary, Version=0.1.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\RegulusLibrary.dll</HintPath>
+      <HintPath>..\FishLibrary\RegulusLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="RegulusRemoting, Version=1.0.5611.16140, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RegulusRemoting, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\RegulusRemoting.dll</HintPath>
+      <HintPath>..\FishLibrary\RegulusRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="RegulusRemotingGhostNative">
-      <HintPath>..\Library\RegulusRemotingGhostNative.dll</HintPath>
+    <Reference Include="RegulusRemotingGhostNative, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FishLibrary\RegulusRemotingGhostNative.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
