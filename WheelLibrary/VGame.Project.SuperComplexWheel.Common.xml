@@ -23,34 +23,32 @@
                 回傳真則為成功
             </returns>
         </member>
-        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheel.Spin(System.Int32,System.Int32)">
+        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheel.SpinNormal(System.Int32,System.Int32)">
             <summary>
-            轉動
+            轉動 - 正常
             </summary>
             <param name="bet">倍數</param>
             <param name="line">線</param>
             <returns></returns>
         </member>
-        <member name="T:VGame.Project.SuperComplexWheel.Common.IWheelLittleGame">
+        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheel.SpinFree(System.Int32,System.Int32)">
             <summary>
-            小遊戲
+            轉動 - 免費
             </summary>
+            <param name="bet">倍數</param>
+            <param name="line">線</param>
+            <returns></returns>
         </member>
-        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheelLittleGame.Spin(System.Int32)">
+        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheel.SpinLittle(System.Int32)">
             <summary>
-            轉動
+            轉動 - 小遊戲
             </summary>
             <param name="bet"></param>
             <returns></returns>
         </member>
-        <member name="T:VGame.Project.SuperComplexWheel.Common.IWheelRatio">
-             <summary>
-            比倍 
-             </summary>
-        </member>
-        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheelRatio.Spin(System.Int32)">
+        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheel.SpinRatio(System.Int32)">
             <summary>
-            轉動
+            轉動 - 比倍
             </summary>
             <param name="bet"></param>
             <returns></returns>
@@ -60,7 +58,7 @@
             轉輪服務
             </summary>
         </member>
-        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheelService.FindMain(System.Guid,System.Int32)">
+        <member name="M:VGame.Project.SuperComplexWheel.Common.IWheelService.Find(System.Guid,System.Int32)">
             <summary>
             主遊戲
             </summary>

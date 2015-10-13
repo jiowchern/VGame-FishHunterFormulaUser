@@ -40,8 +40,8 @@ namespace WheelFormulaUserExample
         private static void _SupplyWheelService(IWheelService wheel_service)
         {
             _IWheelService = wheel_service;
-            Console.WriteLine("取得免費轉輪...");
-            var result = _IWheelService.FindFree(Guid.Empty, 1);
+            Console.WriteLine("取得轉輪...");
+            var result = _IWheelService.Find(Guid.Empty, 1);
             result.OnValue += Program._SupplyFreeWheel;
         }
 
@@ -49,33 +49,34 @@ namespace WheelFormulaUserExample
 
         private static void _SupplyFreeWheel(IWheel wheel)
         {
-
-            var result = wheel.Spin(new Random().Next(), new Random().Next());
-            result.OnValue += Program._SpinFreeResult;
+            Console.WriteLine("\n免費轉動...");
+            var result = wheel.SpinFree(new Random().Next(), new Random().Next());
+            result.OnValue += (spin_result) =>
+            {
+                Program._SpinFreeResult(spin_result);
+                Program._SupplyNormalWheel(wheel);
+            };
         }
 
         private static void _SpinFreeResult(SpinResult spin_result)
         {
-            Program._ShowScore(spin_result);
-
-            Console.WriteLine("取得主要轉輪...");
-            var result = _IWheelService.FindMain(Guid.Empty, 1);
-            result.OnValue += Program._SupplyMainWheel;
+            Program._ShowScore(spin_result);            
         }
 
-        private static void _SupplyMainWheel(IWheel wheel)
+        private static void _SupplyNormalWheel(IWheel wheel)
         {
-            var result = wheel.Spin(new Random().Next(), new Random().Next());
-            result.OnValue += Program._SpinMainResult;
+            Console.WriteLine("\n一般轉動...");
+            var result = wheel.SpinNormal(new Random().Next(), new Random().Next());
+            result.OnValue += (spin_result) =>
+            {
+                Program._SpinMainResult(spin_result);
+                Program._SupplyRatioWheel(wheel);
+            };
         }
 
         private static void _SpinMainResult(SpinResult spin_result)
         {
-            Program._ShowScore(spin_result);
-
-            Console.WriteLine("取得比倍轉輪...");
-            var result = _IWheelService.FindRatio(Guid.Empty, 1);
-            result.OnValue += Program._SupplyRatioWheel;
+            Program._ShowScore(spin_result);            
         }
 
         private static void _ShowScore(SpinResult spin_result)
@@ -90,27 +91,27 @@ namespace WheelFormulaUserExample
             Console.WriteLine("預期分數{0}", spin_result.ExpectedScore);
         }
 
-        private static void _SupplyRatioWheel(IWheelRatio wheel)
-        {
+        private static void _SupplyRatioWheel(IWheel wheel)
+        {            
             var val = new Random().Next();
-            Console.WriteLine("比倍轉輪...倍率:{0}" , val);            
-            var result = wheel.Spin(val);
-            result.OnValue += Program._SpinRatioResult;
+            Console.WriteLine("\n比倍轉動...倍率:{0}", val);            
+            var result = wheel.SpinRatio(val);
+            result.OnValue += (spin_result) =>
+            {
+                Program._SpinRatioResult(spin_result);
+                Program._SupplyLittleGameWheel(wheel);
+            };
         }
 
         private static void _SpinRatioResult(SpinResultRatio spin_result)
-        {
-            
-            Console.WriteLine("符號{1},預期分數{0}", spin_result.ExpectedScore , spin_result.Symbol);
-
-            Console.WriteLine("取得小遊戲轉輪...");
-            var result = _IWheelService.FindLittleGame(Guid.Empty, 1);
-            result.OnValue += Program._SupplyLittleGameWheel;
+        {            
+            Console.WriteLine("符號{1},預期分數{0}", spin_result.ExpectedScore , spin_result.Symbol);            
         }
 
-        private static void _SupplyLittleGameWheel(IWheelLittleGame wheel)
+        private static void _SupplyLittleGameWheel(IWheel wheel)
         {
-            var result = wheel.Spin(new Random().Next());
+            Console.WriteLine("\n小遊戲轉動...");
+            var result = wheel.SpinLittle(new Random().Next());
             result.OnValue += Program._SpinLittleGameResult;
         }
 
