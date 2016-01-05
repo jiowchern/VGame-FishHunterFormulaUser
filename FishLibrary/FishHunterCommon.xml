@@ -4,9 +4,19 @@
         <name>FishHunterCommon</name>
     </assembly>
     <members>
+        <member name="T:VGame.Project.FishHunter.Common.Data.FarmDataRoot">
+            <summary>
+                The data.
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmDataRoot.BufferNode.WinScore">
+            <summary>
+            漁場的輸贏值
+            </summary>
+        </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.FishHitRecord">
             <summary>
-                魚的口袋，有什麼寶物
+                擊殺魚的記錄
             </summary>
         </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.FormulaPlayerRecord">
@@ -49,7 +59,7 @@
         </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.RequsetFishData">
             <summary>
-            魚的封包定義
+                魚的封包定義
             </summary>
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishId">
@@ -59,7 +69,7 @@
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishType">
             <summary>
-            鱼的种类。一般鱼从1~99。特殊鱼从201开始。。。
+                鱼的种类。一般鱼从1~99。特殊鱼从201开始。。。
             </summary>
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishStatus">
@@ -74,16 +84,75 @@
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.GraveGoods">
             <summary>
-            陪葬品
-            條件觸發後，跟發動者一起死
-            例如 炸彈炸到的魚、魚王的小魚
+                陪葬品
+                條件觸發後，跟發動者一起死
+                例如 炸彈炸到的魚、魚王的小魚
             </summary>
         </member>
-        <member name="T:VGame.Project.FishHunter.Common.Data.FarmBuffer">
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.IsGift">
             <summary>
-                The data.
+                判斷是否為禮物
             </summary>
-            [ProtoContract]
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.IsDead">
+            <summary>
+            判斷真正死亡
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.OddsValue">
+            <summary>
+            翻倍結果
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.FarmId">
+            <summary>
+            漁場id
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.TotalSpending">
+            <summary>
+            花費總合
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.WinScore">
+            <summary>
+            贏分
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.FireCount">
+            <summary>
+            遊戲次數
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.WinFrequency">
+            <summary>
+            目前沒在用
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.AsnTimes">
+            <summary>
+            記錄開啟好贏的次數
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.AsnWin">
+            <summary>
+            記錄開啟好贏的總贏分
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.FishHits">
+            <summary>
+            記錄打死的魚
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.RandomTreasures">
+            <summary>
+            記錄得到的隨機寶物
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.TreasureRecord">
+            <summary>
+            ±¼Ä_°O¿ý
+            </summary>
         </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.ACCOUNT_REQUEST_RESULT">
             <summary>
@@ -139,6 +208,11 @@
         <member name="F:VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.SURVIVAL">
             <summary>
                 存活
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.REPEAT_DEATH">
+            <summary>
+            重覆死亡
             </summary>
         </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.FISH_STATUS">

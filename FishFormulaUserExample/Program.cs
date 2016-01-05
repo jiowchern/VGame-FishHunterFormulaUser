@@ -206,11 +206,16 @@ namespace FormulaUserExample
 
 				switch(response.DieResult)
 				{
-					// case FISH_DETERMINATION.DEATH:
-					// case FISH_DETERMINATION.SURVIVAL:
+					case FISH_DETERMINATION.DEATH:
+						Console.WriteLine("擊中結果 = 死亡");
+						break;
+					case FISH_DETERMINATION.SURVIVAL:
+						Console.WriteLine("擊中結果 = 存活");
+						break;
+					case FISH_DETERMINATION.REPEAT_DEATH:
+						Console.WriteLine("擊中結果 = 重覆死亡");
+						break;
 				}
-
-				Console.WriteLine("擊中結果 = {0}", response.DieResult == FISH_DETERMINATION.DEATH ? "死亡" : "存活");
 
 				Console.WriteLine("翻倍結果 = {0}", response.OddsResult);
 
@@ -223,15 +228,9 @@ namespace FormulaUserExample
 				}
 			}
 
-			// Program._Online.Disconnect();
+			Program._Online.Disconnect();
 		}
 
-		/// <summary>
-		///     目前算法漁場ID是1 跟 100
-		///     100是新算法
-		///     player id 改成 GUID
-		/// </summary>
-		/// <param name="obj"></param>
 		private static void _FishStageQueryer(IFishStageQueryer obj)
 		{
 			// var id = Guid.NewGuid();
