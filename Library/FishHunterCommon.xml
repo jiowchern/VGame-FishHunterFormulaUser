@@ -1,0 +1,487 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FishHunterCommon</name>
+    </assembly>
+    <members>
+        <member name="T:VGame.Project.FishHunter.Common.Data.FishHitRecord">
+            <summary>
+                魚的口袋，有什麼寶物
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.FormulaPlayerRecord">
+            <summary>
+            算法 player 記錄
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequestWeaponData.BulletId">
+            <summary>
+                子彈编号，识别是那颗子弹（网）用的。
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequestWeaponData.WeaponType">
+            <summary>
+                武器形态。一般子弹为“1”。特殊子弹从“2”开始。。。
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequestWeaponData.WeaponBet">
+            <summary>
+                武器分数，就是该子弹的玩家押注分数。从1~1000。(目前無用)
+            	TODO 改用這個值 傳押注比較合理
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequestWeaponData.WeaponOdds">
+            <summary>
+                武器倍数，就是该子弹的玩家押注倍数。从1~1000。
+            	TODO 應該是這個值沒用
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequestWeaponData.TotalHits">
+            <summary>
+                武器同时击中的鱼总数量。应该从1~1000。
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.Data.RequestWeaponData.GetTotalBet">
+            <summary>
+            目前的押注公式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.RequsetFishData">
+            <summary>
+            魚的封包定義
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishId">
+            <summary>
+                鱼的编号，识别是那只鱼用的。
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishType">
+            <summary>
+            鱼的种类。一般鱼从1~99。特殊鱼从201开始。。。
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishStatus">
+            <summary>
+                鱼的状态。
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.FishOdds">
+            <summary>
+                鱼的倍数。应该从1~1000。目前只预留到1000倍。
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.FarmBuffer">
+            <summary>
+                The data.
+            </summary>
+            [ProtoContract]
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.ACCOUNT_REQUEST_RESULT">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.HitResponse">
+            <summary>
+                判定结果
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.WepId">
+            <summary>
+                子弹编号
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.FishId">
+            <summary>
+                鱼的编号
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.DieResult">
+            <summary>
+                死亡结果
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.FeedbackWeapons">
+            <summary>
+                取得特殊武器。
+                0表示没有取得。
+                有取得特殊武器从“2”开始。对应特武编号。
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.WeaponBet">
+            <summary>
+            下注金額
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.OddsResult">
+            <summary>
+                1 = 沒有翻倍
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.HitRequest">
+            <summary>
+                新版的封包定義
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.DEATH">
+            <summary>
+                死亡
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.SURVIVAL">
+            <summary>
+                存活
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.FISH_STATUS">
+            <summary>
+                鱼的状态。
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_STATUS.NORMAL">
+            <summary>
+                正常状态
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_STATUS.KING">
+            <summary>
+                鱼王状态
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_STATUS.FREEZE">
+            <summary>
+                冰冻状态
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.GamePlayerRecord">
+            <summary>
+                game player記錄資料
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE">
+            <summary>
+                武器類型
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.INVALID">
+            <summary>
+                0 無效
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.NORMAL">
+            <summary>
+                1一般武器
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.SUPER_BOMB">
+            <summary>
+                2超級炮
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.ELECTRIC_NET">
+            <summary>
+                3電網
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.FREE_POWER">
+            <summary>
+                4免費炮
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.SCREEN_BOMB">
+            <summary>
+                101全屏炸彈
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.THUNDER_BOMB">
+            <summary>
+                皮卡丘 電鰻
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.FIRE_BOMB">
+            <summary>
+                貪食蛇
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.DAMAGE_BALL">
+            <summary>
+                河豚 鐵球
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.OCTOPUS_BOMB">
+            <summary>
+                小章魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.BIG_OCTOPUS_BOMB">
+            <summary>
+                大章魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.KING">
+            <summary>
+            魚王
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.WEAPON_TYPE.FREEZE_BOMB">
+            <summary>
+            冰凍碼錶(炸彈)
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.Data.FISH_TYPE">
+            <summary>
+                所有魚的定義
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.TROPICAL_FISH">
+            <summary>
+                小紅魚(熱帶小魚)
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.ANGEL_FISH">
+            <summary>
+                條紋魚(神仙魚)
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.START_FISH">
+            <summary>
+                海星
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.HIPPOCAMPUS">
+            <summary>
+                海馬
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.LOBSTER">
+            <summary>
+                龍蝦
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.JELLYFISH">
+            <summary>
+                水母
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.FLYINGFISH">
+            <summary>
+                飛魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.TORTOISE">
+            <summary>
+                海龜
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.STINGRAY">
+            <summary>
+                魟魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.NAUTILUS">
+            <summary>
+                鸚鵡螺
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SQUID">
+            <summary>
+                魷魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.LIONFISH">
+            <summary>
+                獅子魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.MOLA">
+            <summary>
+                曼波
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.LANTERN">
+            <summary>
+                燈籠魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SEA_ELVES">
+            <summary>
+                海精靈
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.STURGEON_AROWANA">
+            <summary>
+                鱘龍魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.HAMMERHEAD_SHARK">
+            <summary>
+                槌頭鯊
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.BELUGA_WHALES">
+            <summary>
+                白鯨
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.BLUE_WHALE">
+            <summary>
+                藍鯨
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.RED_WHALE">
+            <summary>
+                紅鯨
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.GOLDEN_WHALE">
+            <summary>
+                金鯨
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.WHALE_SLIVER">
+            <summary>
+                銀鯨
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.WHALE_COLOR">
+            <summary>
+                彩鯨
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_RING">
+            <summary>
+                大三元 大四喜
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_EAT_FISH">
+            <summary>
+                大魚吃小魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_EAT_FISH_CRAZY">
+            <summary>
+                鳯凰 200~600倍, X1~X10
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_FREEZE_BOMB">
+            <summary>
+                特殊魚往下開始
+            </summary>
+            <summary>
+                冰凍碼錶
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_SCREEN_BOMB">
+            <summary>
+                全屏炸彈
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_THUNDER_BOMB">
+            <summary>
+                皮卡丘
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_FIRE_BOMB">
+            <summary>
+                貪食蛇
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_DAMAGE_BALL">
+            <summary>
+                河豚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_OCTOPUS_BOMB">
+            <summary>
+                小章魚
+            </summary>
+        </member>
+        <member name="F:VGame.Project.FishHunter.Common.Data.FISH_TYPE.SPECIAL_BIG_OCTOPUS_BOMB">
+            <summary>
+                大章魚
+            </summary>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.GPI.IFishStage">
+            <summary>
+                魚場
+            </summary>
+        </member>
+        <member name="E:VGame.Project.FishHunter.Common.GPI.IFishStage.OnHitExceptionEvent">
+            <summary>
+                例外
+            </summary>
+        </member>
+        <member name="E:VGame.Project.FishHunter.Common.GPI.IFishStage.OnTotalHitResponseEvent">
+            <summary>
+            一次判定所有hit事件
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.GPI.IFishStage.AccountId">
+            <summary>
+                玩家id
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.GPI.IFishStage.FishStage">
+            <summary>
+                魚場id
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.GPI.IFishStage.Hit(VGame.Project.FishHunter.Common.Data.HitRequest)">
+            <summary>
+                判定請求
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.GPI.IFishStageQueryer">
+            <summary>
+                魚場請求
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.GPI.IFishStageQueryer.Query(System.Guid,System.Int32)">
+            <summary>
+                查詢請求
+            </summary>
+            <param name="player_id">
+            </param>
+            <param name="fish_stage">
+            </param>
+            <returns>
+                魚場
+            </returns>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.GPI.IFormulaPlayerRecorder.Query(System.Guid)">
+            <summary>
+            查詢算法伺服器的玩家歷程
+            </summary>
+            <param name="player_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.GPI.IFormulaPlayerRecorder.Save(VGame.Project.FishHunter.Common.Data.FormulaPlayerRecord)">
+            <summary>
+            儲存算法伺服器的玩家歷程
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VGame.Project.FishHunter.Common.GPI.IVerify">
+            <summary>
+                驗證介面
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.GPI.IVerify.Login(System.String,System.String)">
+            <summary>
+                登入
+            </summary>
+            <param name="id">
+                帳號.
+            </param>
+            <param name="password">
+                密碼.
+            </param>
+            <returns>
+                回傳真則為成功
+            </returns>
+        </member>
+    </members>
+</doc>

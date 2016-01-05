@@ -1,31 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
+using System;
 
 using Regulus.Remoting;
 using Regulus.Utility;
-
 
 using VGame.Project.FishHunter.Common.Data;
 using VGame.Project.FishHunter.Common.GPI;
 using VGame.Project.FishHunter.Formula;
 
-
 using Console = System.Console;
 using SpinWait = System.Threading.SpinWait;
 
 namespace FormulaUserExample
-{
-	using System.IO;
-	using System.Net;
-	using System.Net.Mime;
-	using System.Reflection;
-	using System.Timers;
-	using System.Windows.Forms;
-
-
-	using Microsoft.Win32.SafeHandles;
-
+{   
 	internal class Program
 	{
 		private static IFishStage _FishStage;
@@ -34,7 +21,6 @@ namespace FormulaUserExample
 
 		private static IUser _User;
 
-		[STAThread]
 		private static void Main(string[] args)
 		{
 			var sw = new SpinWait();
@@ -75,30 +61,7 @@ namespace FormulaUserExample
 			// 如果有錯誤的方法呼叫則會發生此事件
 			// 通常原因可能是版本有誤
 			// 請到 https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master 更新版本
-			Program._User.ErrorMethodEvent += Program._ErrorMethodEvent;
-
-			Program._User.VersionErrorEvent += Program._User_VersionErrorEvent;
-		}
-
-		private static void _User_VersionErrorEvent()
-		{
-			var url = "https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master";
-
-			using(var s = new SaveFileDialog())
-			{
-				s.Title = "版本已變動，請選擇存放位置";
-				s.FileName = "FormulaUserExample";
-				s.DefaultExt = "zip";
-
-				if(s.ShowDialog() == DialogResult.OK)
-				{
-					var webClient = new WebClient();
-
-					webClient.DownloadFile(url, s.FileName);
-				}
-
-				Environment.Exit(Environment.ExitCode);
-			}
+			_User.ErrorMethodEvent += _ErrorMethodEvent;
 		}
 
 		private static void _ErrorMethodEvent(string method, string message)
@@ -108,7 +71,7 @@ namespace FormulaUserExample
 			通常原因可能是版本有誤\n 
 			請到 https://codeload.github.com/jiowchern/VGame-FishHunterFormulaUser/zip/master 更新版本\n 
 			{1} 
-			", method, message);
+			", method , message);
 		}
 
 		private static void _BeginOnlineStatus(IOnline online)
@@ -139,48 +102,26 @@ namespace FormulaUserExample
 		/// <param name="fish_stage"></param>
 		private static void _Attack(IFishStage fish_stage)
 		{
-			var tt = new RequsetFishData[0];
-
-			var graveGoods = new[]
-				                 {
-					                 new RequsetFishData
-						                 {
-							                 FishId = 20, 
-							                 FishOdds = 5, 
-							                 FishStatus = FISH_STATUS.NORMAL, 
-							                 FishType = FISH_TYPE.ANGEL_FISH, 
-							                 GraveGoods = new RequsetFishData[0]
-						                 }, 
-					                 new RequsetFishData
-						                 {
-							                 FishId = 21, 
-							                 FishOdds = 5, 
-							                 FishStatus = FISH_STATUS.NORMAL, 
-							                 FishType = FISH_TYPE.ANGEL_FISH, 
-							                 GraveGoods = new RequsetFishData[0]
-						                 }
-				                 };
-
 			var fishs = new[]
-				            {
-					            new RequsetFishData
-						            {
-							            FishId = 1, 
-							            FishOdds = 1, 
-							            FishStatus = FISH_STATUS.NORMAL, 
-							            FishType = FISH_TYPE.ANGEL_FISH, 
-							            GraveGoods = null
-						            }
-				            };
+			{
+				new RequsetFishData
+				{
+					FishId = 1, 
+					FishOdds = 1, 
+					FishStatus = FISH_STATUS.KING, 
+					FishType = FISH_TYPE.TROPICAL_FISH,
+					GraveGoods = new RequsetFishData[0],
+				},
+			};
 
 			var weapdaData = new RequestWeaponData
-				                 {
-					                 BulletId = 1, 
-					                 WeaponType = WEAPON_TYPE.NORMAL, 
-					                 WeaponBet = 1000, 
-					                 WeaponOdds = 1, 
-					                 TotalHits = fishs.Length
-				                 };
+			{
+				BulletId = 1,
+				WeaponType = WEAPON_TYPE.NORMAL,
+				WeaponBet = 100, 
+				WeaponOdds = 1, 
+				TotalHits = 1,                
+			};
 
 			// 攻擊判定請求
 			Console.WriteLine("攻擊測試");
@@ -190,7 +131,7 @@ namespace FormulaUserExample
 			fish_stage.Hit(hitRequest);
 
 			// 註冊攻擊回傳
-			fish_stage.OnTotalHitResponseEvent += Program.Obj_OnTotalHitResponseEvent;
+			fish_stage.OnTotalHitResponseEvent += Program.Obj_OnTotalHitResponseEvent; 
 
 			// 需要接下回傳的變數
 			Program._FishStage = fish_stage;
@@ -203,27 +144,23 @@ namespace FormulaUserExample
 				Console.WriteLine("押注金額 = {0}", response.WeaponBet);
 
 				Console.WriteLine("擊中魚ID = {0}，子彈ID = {1}", response.FishId, response.WepId);
-
-				switch(response.DieResult)
-				{
-					// case FISH_DETERMINATION.DEATH:
-					// case FISH_DETERMINATION.SURVIVAL:
-				}
-
+				
 				Console.WriteLine("擊中結果 = {0}", response.DieResult == FISH_DETERMINATION.DEATH ? "死亡" : "存活");
 
 				Console.WriteLine("翻倍結果 = {0}", response.OddsResult);
 
-				if(response.FeedbackWeapons != null)
+
+				if (response.FeedbackWeapons != null)
 				{
-					foreach(var weaponType in response.FeedbackWeapons)
+					foreach (var weaponType in response.FeedbackWeapons)
 					{
 						Console.WriteLine("得到的道具是" + weaponType);
 					}
 				}
+				
 			}
 
-			// Program._Online.Disconnect();
+			Program._Online.Disconnect();
 		}
 
 		/// <summary>
@@ -234,26 +171,23 @@ namespace FormulaUserExample
 		/// <param name="obj"></param>
 		private static void _FishStageQueryer(IFishStageQueryer obj)
 		{
-			// var id = Guid.NewGuid();
-
-			// var id  =new Guid("a0d0b42c-1293-4bbf-b6c6-02476818a59c"); 
 			var id = new Guid();
 
 			// 請求開啟魚場
 			var result = obj.Query(id, 100);
 			result.OnValue += fish_stage =>
+			{
+				if(fish_stage != null)
 				{
-					if(fish_stage != null)
-					{
-						Console.WriteLine("魚場開啟成功");
-
-						Program._GetFishStage(fish_stage);
-					}
-					else
-					{
-						Console.WriteLine("魚場開啟失敗");
-					}
-				};
+					Console.WriteLine("魚場開啟成功");
+					
+					Program._GetFishStage(fish_stage);
+				}
+				else
+				{
+					Console.WriteLine("魚場開啟失敗");
+				}
+			};
 		}
 
 		private static void _Connect(IConnect obj)
@@ -261,19 +195,20 @@ namespace FormulaUserExample
 			Program._User.Remoting.ConnectProvider.Supply -= Program._Connect;
 
 			// 與伺服器連線
-			// var result = obj.Connect("210.65.10.160", 38971);
-			var result = obj.Connect("127.0.0.1", 38971);
+			var result = obj.Connect("210.65.10.160", 38971);
+
+			//var result = obj.Connect("127.0.0.1", 38971);
 			result.OnValue += success =>
+			{
+				if(success)
 				{
-					if(success)
-					{
-						Console.WriteLine("連線成功");
-					}
-					else
-					{
-						Console.WriteLine("連線失敗");
-					}
-				};
+					Console.WriteLine("連線成功");
+				}
+				else
+				{
+					Console.WriteLine("連線失敗");
+				}
+			};
 		}
 
 		// 驗證登入
@@ -281,16 +216,16 @@ namespace FormulaUserExample
 		{
 			var result = obj.Login("Guest", "vgame");
 			result.OnValue += success =>
+			{
+				if(success)
 				{
-					if(success)
-					{
-						Console.WriteLine("登入成功");
-					}
-					else
-					{
-						Console.WriteLine("登入失敗");
-					}
-				};
+					Console.WriteLine("登入成功");
+				}
+				else
+				{
+					Console.WriteLine("登入失敗");
+				}
+			};
 		}
 	}
 }
