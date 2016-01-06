@@ -169,8 +169,8 @@ namespace FormulaUserExample
 							            FishOdds = 1, 
 							            FishStatus = FISH_STATUS.NORMAL, 
 							            FishType = FISH_TYPE.ANGEL_FISH, 
-							            GraveGoods = null
-						            }
+							            GraveGoods = graveGoods
+									}
 				            };
 
 			var weapdaData = new RequestWeaponData
@@ -185,7 +185,7 @@ namespace FormulaUserExample
 			// 攻擊判定請求
 			Console.WriteLine("攻擊測試");
 
-			var hitRequest = new HitRequest(fishs, weapdaData);
+			var hitRequest = new HitRequest(fishs, weapdaData, true);
 
 			fish_stage.Hit(hitRequest);
 
@@ -206,32 +206,35 @@ namespace FormulaUserExample
 
 				switch(response.DieResult)
 				{
-					// case FISH_DETERMINATION.DEATH:
-					// case FISH_DETERMINATION.SURVIVAL:
+					case FISH_DETERMINATION.DEATH:
+						Console.WriteLine("擊中結果 = 死亡");
+						break;
+					case FISH_DETERMINATION.SURVIVAL:
+						Console.WriteLine("擊中結果 = 存活");
+						break;
+					case FISH_DETERMINATION.REPEAT_DEATH:
+						Console.WriteLine("擊中結果 = 重覆死亡");
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
 				}
 
-				Console.WriteLine("擊中結果 = {0}", response.DieResult == FISH_DETERMINATION.DEATH ? "死亡" : "存活");
+				Console.WriteLine("翻倍結果 = {0}", response.IsDoubled);
 
-				Console.WriteLine("翻倍結果 = {0}", response.OddsResult);
-
-				if(response.FeedbackWeapons != null)
+				if(response.FeedbackWeapons == null)
 				{
-					foreach(var weaponType in response.FeedbackWeapons)
-					{
-						Console.WriteLine("得到的道具是" + weaponType);
-					}
+					continue;
+				}
+
+				foreach(var weaponType in response.FeedbackWeapons)
+				{
+					Console.WriteLine("得到的道具是" + weaponType);
 				}
 			}
 
-			// Program._Online.Disconnect();
+			Program._Online.Disconnect();
 		}
 
-		/// <summary>
-		///     目前算法漁場ID是1 跟 100
-		///     100是新算法
-		///     player id 改成 GUID
-		/// </summary>
-		/// <param name="obj"></param>
 		private static void _FishStageQueryer(IFishStageQueryer obj)
 		{
 			// var id = Guid.NewGuid();
@@ -240,7 +243,7 @@ namespace FormulaUserExample
 			var id = new Guid();
 
 			// 請求開啟魚場
-			var result = obj.Query(id, 100);
+			var result = obj.Query(id, 109);
 			result.OnValue += fish_stage =>
 				{
 					if(fish_stage != null)
@@ -261,8 +264,9 @@ namespace FormulaUserExample
 			Program._User.Remoting.ConnectProvider.Supply -= Program._Connect;
 
 			// 與伺服器連線
-			 var result = obj.Connect("210.65.10.160", 38971);
-			//var result = obj.Connect("127.0.0.1", 38971);
+			//var result = obj.Connect("210.65.10.160", 38971);
+
+			 var result = obj.Connect("127.0.0.1", 38971);
 			result.OnValue += success =>
 				{
 					if(success)

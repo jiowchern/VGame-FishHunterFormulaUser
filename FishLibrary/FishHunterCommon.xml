@@ -96,13 +96,24 @@
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.IsDead">
             <summary>
-            判斷真正死亡
+                判斷真正死亡
             </summary>
         </member>
-        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.OddsValue">
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.IsDoubled">
             <summary>
-            翻倍結果
+                翻倍結果
             </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.HitDieRate">
+            <summary>
+                死亡率
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.Data.RequsetFishData.GetRealOdds">
+            <summary>
+                取得真正的倍數
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.FarmRecord.FarmId">
             <summary>
@@ -187,17 +198,52 @@
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.WeaponBet">
             <summary>
-            下注金額
+                下注金額
             </summary>
         </member>
-        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.OddsResult">
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.IsDoubled">
             <summary>
-                1 = 沒有翻倍
+                false = 沒有翻倍
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.DieRate">
+            <summary>
+                死亡率
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.FishOdds">
+            <summary>
+                倍數
             </summary>
         </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.HitRequest">
             <summary>
                 新版的封包定義
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitRequest.FishDatas">
+            <summary>
+                魚的資料
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitRequest.WeaponData">
+            <summary>
+                武器資料
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitRequest.IsFirstTrigger">
+            <summary>
+                判斷武器是否第一次觸發
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.Data.HitRequest.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:VGame.Project.FishHunter.Common.Data.HitRequest"/> class. 
+            </summary>
+        </member>
+        <member name="M:VGame.Project.FishHunter.Common.Data.HitRequest.#ctor(VGame.Project.FishHunter.Common.Data.RequsetFishData[],VGame.Project.FishHunter.Common.Data.RequestWeaponData,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VGame.Project.FishHunter.Common.Data.HitRequest"/> class. 
             </summary>
         </member>
         <member name="F:VGame.Project.FishHunter.Common.Data.FISH_DETERMINATION.DEATH">
