@@ -219,7 +219,7 @@ namespace FormulaUserExample
 						throw new ArgumentOutOfRangeException();
 				}
 
-				Console.WriteLine("翻倍結果 = {0}", response.IsDoubled);
+				Console.WriteLine("翻倍結果 = {0}", response.Multiple);
 
 				if(response.FeedbackWeapons == null)
 				{

@@ -99,7 +99,7 @@
                 判斷真正死亡
             </summary>
         </member>
-        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.IsDoubled">
+        <member name="P:VGame.Project.FishHunter.Common.Data.RequsetFishData.Multiple">
             <summary>
                 翻倍結果
             </summary>
@@ -201,7 +201,7 @@
                 下注金額
             </summary>
         </member>
-        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.IsDoubled">
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.Multiple">
             <summary>
                 false = 沒有翻倍
             </summary>
