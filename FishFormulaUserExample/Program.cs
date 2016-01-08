@@ -165,12 +165,12 @@ namespace FormulaUserExample
 				            {
 					            new RequsetFishData
 						            {
-							            FishId = 1, 
+							            FishId = 100, 
 							            FishOdds = 1, 
 							            FishStatus = FISH_STATUS.NORMAL, 
-							            FishType = FISH_TYPE.ANGEL_FISH, 
+							            FishType = FISH_TYPE.SPECIAL_EAT_FISH_CRAZY, 
 							            GraveGoods = graveGoods
-									}
+						            }
 				            };
 
 			var weapdaData = new RequestWeaponData
@@ -202,7 +202,13 @@ namespace FormulaUserExample
 			{
 				Console.WriteLine("押注金額 = {0}", response.WeaponBet);
 
-				Console.WriteLine("擊中魚ID = {0}，子彈ID = {1}", response.FishId, response.WepId);
+				Console.WriteLine("擊中魚ID = {0}", response.FishId);
+
+				Console.WriteLine("擊中魚子彈ID = {0}", response.WepId);
+
+				Console.WriteLine("擊中魚倍数 = {0}", response.FishOdds);
+
+				Console.WriteLine("翻倍結果 = {0}", response.Multiple);
 
 				switch(response.DieResult)
 				{
@@ -218,8 +224,6 @@ namespace FormulaUserExample
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
-
-				Console.WriteLine("翻倍結果 = {0}", response.Multiple);
 
 				if(response.FeedbackWeapons == null)
 				{
@@ -264,9 +268,9 @@ namespace FormulaUserExample
 			Program._User.Remoting.ConnectProvider.Supply -= Program._Connect;
 
 			// 與伺服器連線
-			//var result = obj.Connect("210.65.10.160", 38971);
+			var result = obj.Connect("210.65.10.160", 38971);
 
-			 var result = obj.Connect("127.0.0.1", 38971);
+			// var result = obj.Connect("127.0.0.1", 38971);
 			result.OnValue += success =>
 				{
 					if(success)

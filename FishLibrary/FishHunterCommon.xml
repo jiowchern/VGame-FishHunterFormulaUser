@@ -203,17 +203,17 @@
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.Multiple">
             <summary>
-                false = 沒有翻倍
-            </summary>
-        </member>
-        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.DieRate">
-            <summary>
-                死亡率
+                翻倍
             </summary>
         </member>
         <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.FishOdds">
             <summary>
                 倍數
+            </summary>
+        </member>
+        <member name="P:VGame.Project.FishHunter.Common.Data.HitResponse.DieRate">
+            <summary>
+                死亡率
             </summary>
         </member>
         <member name="T:VGame.Project.FishHunter.Common.Data.HitRequest">
