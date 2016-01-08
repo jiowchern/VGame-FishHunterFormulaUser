@@ -166,7 +166,7 @@ namespace FormulaUserExample
 					            new RequsetFishData
 						            {
 							            FishId = 100, 
-							            FishOdds = 1, 
+							            FishOdds = 568, 
 							            FishStatus = FISH_STATUS.NORMAL, 
 							            FishType = FISH_TYPE.SPECIAL_EAT_FISH_CRAZY, 
 							            GraveGoods = graveGoods
@@ -206,7 +206,7 @@ namespace FormulaUserExample
 
 				Console.WriteLine("擊中魚子彈ID = {0}", response.WepId);
 
-				Console.WriteLine("擊中魚倍数 = {0}", response.FishOdds);
+				Console.WriteLine("擊中魚倍數 = {0}", response.FishOdds);
 
 				Console.WriteLine("翻倍結果 = {0}", response.Multiple);
 
@@ -268,9 +268,9 @@ namespace FormulaUserExample
 			Program._User.Remoting.ConnectProvider.Supply -= Program._Connect;
 
 			// 與伺服器連線
-			var result = obj.Connect("210.65.10.160", 38971);
+			//var result = obj.Connect("210.65.10.160", 38971);
 
-			// var result = obj.Connect("127.0.0.1", 38971);
+			 var result = obj.Connect("127.0.0.1", 38971);
 			result.OnValue += success =>
 				{
 					if(success)
